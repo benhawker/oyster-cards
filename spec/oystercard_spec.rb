@@ -24,6 +24,12 @@ describe Oystercard do
 			oystercard.top_up(20)
 			expect(oystercard.balance).to eq (20)
 		end
+
+		it "will not be topped up if new balance would exceed 50" do
+			oystercard = Oystercard.new(20)
+			expect { oystercard.top_up(31) }.to raise_error "This would take you over the max balance!"
+			# expect(oystercard.balance).to eq (20)
+		end
 	end
 
 
