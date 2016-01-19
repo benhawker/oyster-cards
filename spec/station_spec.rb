@@ -3,11 +3,11 @@ require "station"
 describe Station do
 
 	let(:station) { Station.new }
-
-  # it { is_expected.to respond_to(:zone) }
+  
   context "zones" do
+  	it { is_expected.to respond_to(:zone) }
+	  
 	  it "defaults to Zone 1" do
-	  	# station = Station.new
 	    expect(station.zone).to eq 1
 	  end
 
