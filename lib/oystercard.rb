@@ -14,6 +14,11 @@ class Oystercard
 		@balance += amount
 	end
 
+	def tap_in
+
+	end
+
+
 	private
 
 	def exceeds_max_balance?(balance)

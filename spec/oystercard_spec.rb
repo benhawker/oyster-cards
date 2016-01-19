@@ -37,6 +37,16 @@ describe Oystercard do
 		end
 	end
 
+	context "tap in" do
+
+
+	end
+
+	context "tap out" do
+		
+
+	end
+
 
 
 end
