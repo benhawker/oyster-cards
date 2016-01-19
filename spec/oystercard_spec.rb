@@ -13,6 +13,10 @@ describe Oystercard do
 			oystercard = Oystercard.new(20)
 			expect(oystercard.balance).to eq (20)
 		end
+
+		it "cannot be created with a balance greater than 50" do
+			expect { Oystercard.new(51) }.to raise_error "Max balance is #{Oystercard::MAX_BALANCE}"
+		end
 	end
 
 	context "top up" do
