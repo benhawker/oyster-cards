@@ -45,13 +45,18 @@ describe Oystercard do
 			oystercard_20.tap_in(orchard)
 			#expect new journey
 		end
+
+		it "raises error if user has unsufficient funds" do
+			oystercard = Oystercard.new(0.5)
+			expect { oystercard.tap_in(orchard) }.to raise_error "You don't have enough for this journey :("
+		end
 	end
 
 	context "tap out" do
 		it "charges a fare" do
 			oystercard_20.tap_in(orchard)
-			oystercard_20.tap_out(orchard)
-			expect(oystercard_20.balance).to eq (17)
+			oystercard_20.tap_out(somerset)
+			expect(oystercard_20.balance).to eq (17.80)
 		end
 
 	end

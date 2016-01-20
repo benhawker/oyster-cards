@@ -22,19 +22,19 @@ describe Journey do
 		context "calculates number of zones crossed" do
 			it "from zone 1 to zone 4" do
 				journey = Journey.new(station_one)
-				journey.complete(station_four)
+				journey.complete_journey(station_four)
 				expect(journey.send(:zones_crossed)).to eq (3)
 			end
 
 			it "from zone 4 to zone 2" do
 				journey = Journey.new(station_four)
-				journey.complete(station_two)
+				journey.complete_journey(station_two)
 				expect(journey.send(:zones_crossed)).to eq (2)
 			end
 
 			it "from zone 4 to zone 4" do
 				journey = Journey.new(station_four)
-				journey.complete(station_four)
+				journey.complete_journey(station_four)
 				expect(journey.send(:zones_crossed)).to eq (0)
 			end
 		end
@@ -43,13 +43,13 @@ describe Journey do
 		context "calculates the variable fare" do
 			it "from zone 1 to zone 4" do
 				journey = Journey.new(station_one)
-				journey.complete(station_four)
+				journey.complete_journey(station_four)
 				expect(journey.send(:variable_trip_price)).to eq (3.60)
 			end
 
 			it "from zone 4 to zone 2" do
 				journey = Journey.new(station_four)
-				journey.complete(station_two)
+				journey.complete_journey(station_two)
 				expect(journey.send(:variable_trip_price)).to eq (2.40)
 			end
 		end
@@ -57,13 +57,13 @@ describe Journey do
 		context "calculates the total fare" do
 			it "from zone 1 to zone 4" do
 				journey = Journey.new(station_one)
-				journey.complete(station_four)
+				journey.complete_journey(station_four)
 				expect(journey.calculate_fare).to eq (4.60)
 			end
 
 			it "from zone 4 to zone 2" do
 				journey = Journey.new(station_four)
-				journey.complete(station_two)
+				journey.complete_journey(station_two)
 				expect(journey.calculate_fare).to eq (3.40)
 			end
 		end
