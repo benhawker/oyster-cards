@@ -53,12 +53,16 @@ describe Oystercard do
 	end
 
 	context "tap out" do
-		it "charges a fare" do
+		it "charges the correct fare for a valid journey" do
 			oystercard_20.tap_in(orchard)
 			oystercard_20.tap_out(somerset)
 			expect(oystercard_20.balance).to eq (17.80)
 		end
 
+		it "deducts the penalty fare if user did not tap in" do
+			oystercard_20.tap_out(somerset)
+			expect(oystercard_20.balance).to eq (15.00)
+		end
 	end
 
 end

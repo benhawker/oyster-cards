@@ -7,14 +7,9 @@ describe Journey do
 	let(:station_two) { Station.new(2) }
 	let(:station_four) { Station.new(4) }
 
-	context "validations" do
+	context "validation" do
 		it "is not valid without an origin" do
 			expect { Journey.new }.to raise_error
-		end
-
-		xit "is valid with an origin station" do
-			journey = Journey.new(station_one)
-			expect(journey).to be_valid
 		end
 	end
 
@@ -67,6 +62,8 @@ describe Journey do
 				expect(journey.calculate_fare).to eq (3.40)
 			end
 		end
+
+		context ""
 	end
 
 end
