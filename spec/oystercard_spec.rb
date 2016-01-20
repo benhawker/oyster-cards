@@ -3,6 +3,9 @@ require 'oystercard'
 describe Oystercard do
 
 	let(:oystercard) { Oystercard.new }
+	let(:oystercard_20) { Oystercard.new(20) }
+	let(:orchard) { Station.new(1) }
+	let(:somerset) { Station.new(2) }
 
 	context "on creation" do
 		it "is created with a balance of zero by default" do
@@ -38,15 +41,19 @@ describe Oystercard do
 	end
 
 	context "tap in" do
-
-
+		it "creates a new journey" do
+			oystercard_20.tap_in(orchard)
+			#expect new journey
+		end
 	end
 
 	context "tap out" do
-		
+		it "charges a fare" do
+			oystercard_20.tap_in(orchard)
+			oystercard_20.tap_out(orchard)
+			expect(oystercard_20.balance).to eq (17)
+		end
 
 	end
-
-
 
 end

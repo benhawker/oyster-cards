@@ -1,3 +1,5 @@
+require "./lib/journey"
+
 class Oystercard
 
 	attr_reader :balance
@@ -14,10 +16,14 @@ class Oystercard
 		@balance += amount
 	end
 
-	def tap_in
-
+	def tap_in(origin_station)
+		@journey = Journey.new(origin_station)
 	end
 
+	def tap_out(destination_station)
+		@journey.destination_station = destination_station
+		@journey.complete(destination_station) if @journey
+	end
 
 	private
 

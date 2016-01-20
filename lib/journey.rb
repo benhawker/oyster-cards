@@ -1,23 +1,27 @@
 class Journey
 
-	attr_reader :origin, :destination
+	attr_accessor :origin_station, :destination_station
 
 	BASE_FARE = 1
 	PRICE_PER_ZONE = 1.2
 
-	def initialize(origin, destination)
-		@origin = origin
-		@destination = destination
+	def initialize(origin_station)
+		@origin_station = origin_station
+		@destination_station = nil
 	end
 
 	def calculate_fare
 		BASE_FARE + variable_trip_price
 	end
 
+	def complete(destination_station)
+		@destination_station = destination_station
+	end
+
 	private
 
 	def zones_crossed
-		(origin.zone - destination.zone).abs
+		(origin_station.zone - destination_station.zone).abs
 	end
 
   def variable_trip_price

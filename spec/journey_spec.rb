@@ -8,55 +8,65 @@ describe Journey do
 	let(:station_four) { Station.new(4) }
 
 	context "validations" do
-		it "is not valid without an origin and a destination" do
+		it "is not valid without an origin" do
 			expect { Journey.new }.to raise_error
 		end
 
-		xit "is valid with an origin and a destination station" do
-			journey = Journey.new(station_one, station_two)
+		xit "is valid with an origin station" do
+			journey = Journey.new(station_one)
 			expect(journey).to be_valid
 		end
 	end
 
-	context "calculates number of zones crossed" do
-		it "from zone 1 to zone 4" do
-			journey = Journey.new(station_one, station_four)
-			expect(journey.send(:zones_crossed)).to eq (3)
+	describe "complete" do
+		context "calculates number of zones crossed" do
+			it "from zone 1 to zone 4" do
+				journey = Journey.new(station_one)
+				journey.complete(station_four)
+				expect(journey.send(:zones_crossed)).to eq (3)
+			end
+
+			it "from zone 4 to zone 2" do
+				journey = Journey.new(station_four)
+				journey.complete(station_two)
+				expect(journey.send(:zones_crossed)).to eq (2)
+			end
+
+			it "from zone 4 to zone 4" do
+				journey = Journey.new(station_four)
+				journey.complete(station_four)
+				expect(journey.send(:zones_crossed)).to eq (0)
+			end
 		end
 
-		it "from zone 4 to zone 2" do
-			journey = Journey.new(station_four, station_one)
-			expect(journey.send(:zones_crossed)).to eq (3)
+
+		context "calculates the variable fare" do
+			it "from zone 1 to zone 4" do
+				journey = Journey.new(station_one)
+				journey.complete(station_four)
+				expect(journey.send(:variable_trip_price)).to eq (3.60)
+			end
+
+			it "from zone 4 to zone 2" do
+				journey = Journey.new(station_four)
+				journey.complete(station_two)
+				expect(journey.send(:variable_trip_price)).to eq (2.40)
+			end
 		end
 
-		it "from zone 3 to zone 3" do
-			journey = Journey.new(station_four, station_four)
-			expect(journey.send(:zones_crossed)).to eq (0)
+		context "calculates the total fare" do
+			it "from zone 1 to zone 4" do
+				journey = Journey.new(station_one)
+				journey.complete(station_four)
+				expect(journey.calculate_fare).to eq (4.60)
+			end
+
+			it "from zone 4 to zone 2" do
+				journey = Journey.new(station_four)
+				journey.complete(station_two)
+				expect(journey.calculate_fare).to eq (3.40)
+			end
 		end
 	end
 
-
-	context "calculates the variable fare" do
-		it "from zone 1 to zone 4" do
-			journey = Journey.new(station_one, station_four)
-			expect(journey.send(:variable_trip_price)).to eq (3.60)
-		end
-
-		it "from zone 4 to zone 2" do
-			journey = Journey.new(station_four, station_one)
-			expect(journey.send(:variable_trip_price)).to eq (3.60)
-		end
-	end
-
-	context "calculates the total fare" do
-		it "from zone 1 to zone 4" do
-			journey = Journey.new(station_one, station_four)
-			expect(journey.calculate_fare).to eq (4.60)
-		end
-
-		it "from zone 4 to zone 2" do
-			journey = Journey.new(station_four, station_one)
-			expect(journey.calculate_fare).to eq (4.60)
-		end
-	end
 end
