@@ -1,6 +1,6 @@
 class Journey
 
-	attr_accessor :origin_station, :destination_station
+	attr_reader :origin_station, :destination_station
 
 	BASE_FARE = 1
 	PRICE_PER_ZONE = 1.2
